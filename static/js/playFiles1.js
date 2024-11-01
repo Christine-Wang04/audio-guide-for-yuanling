@@ -187,7 +187,7 @@ async function handleLocationChange(latitude, longitude) {
     }
 
     // adjust the following conditions for actual location-based playback
-    if (latitude > 22.5974 && latitude < 22.5980 && longitude > 113.9990 && longitude < 114) {
+    if (latitude > 22.5526 && latitude < 22.5546 && longitude > 114.0913 && longitude < 114.0919) {
         playTrack(tracks["location1"], "location1");
     } else if (latitude > 22.5971 && latitude < 22.5974 && longitude > 113.9990 && longitude < 114) {
         playTrack(tracks["location2"], "location2");
@@ -195,10 +195,6 @@ async function handleLocationChange(latitude, longitude) {
         playTrack(tracks["location3"], "location3");
     } else if (latitude > 22.5957 && latitude < 22.5967 && longitude > 113.9980 && longitude < 114) {
         playTrack(tracks["location4"], "location4");
-    } else if (latitude > 22.5952 && latitude < 22.5957 && longitude > 113.9970 && longitude < 113.9990) {
-        playTrack(tracks["location5"], "location5");
-    } else if (latitude > 22.5530 && latitude < 22.5540 && longitude > 114.0930 && longitude < 114.0940) {
-        playTrack(tracks["location6"], "location6");
     } else {
         console.log("no track assigned for this location.");
         // optionally, stop the current track if not in any location
