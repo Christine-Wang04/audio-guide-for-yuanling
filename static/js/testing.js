@@ -222,28 +222,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                     saveBlueSquares(); // save squares after removing
                 }
-            } else if (p.keyCode === p.UP_ARROW) {
+            } else if (p.keyIsDown(p.UP_ARROW)) {
                 // increase height
                 let draggingSquare = blueSquares.find(sq => sq.dragging);
                 if (draggingSquare) {
                     draggingSquare.h = p.min(draggingSquare.h + 5, canvasSize);
                     saveBlueSquares(); // save changes after resizing
                 }
-            } else if (p.keyCode === p.DOWN_ARROW) {
+            } else if (p.keyIsDown(p.DOWN_ARROW)) {
                 // decrease height
                 let draggingSquare = blueSquares.find(sq => sq.dragging);
                 if (draggingSquare) {
                     draggingSquare.h = p.max(draggingSquare.h - 5, 10);
                     saveBlueSquares(); // save changes after resizing
                 }
-            } else if (p.keyCode === p.LEFT_ARROW) {
+            } else if (p.keyIsDown(p.LEFT_ARROW)) {
                 // decrease width
                 let draggingSquare = blueSquares.find(sq => sq.dragging);
                 if (draggingSquare) {
                     draggingSquare.w = p.min(draggingSquare.w - 5, canvasSize);
                     saveBlueSquares(); // save changes after resizing
                 }
-            } else if (p.keyCode === p.RIGHT_ARROW) {
+            } else if (p.keyIsDown(p.RIGHT_ARROW)) {
                 // increase width
                 let draggingSquare = blueSquares.find(sq => sq.dragging);
                 if (draggingSquare) {
