@@ -1,20 +1,33 @@
-/* general body styles */
-body {
-    background-color: #ddebee;
-    font-family: Arial, sans-serif;
-    font-weight: 800;
-}
-
 h1 {
     color: #34495e;
     font-weight: 800;
     margin-left: 5%;
-    font-size: 64px;
+    font-size: 8vw;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* prevent scrolling */
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+}
+
+.background-image {
+    position: fixed; /* position it fixed to cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/group4/group4_image2.png');
+    background-size: cover; 
+    background-position: center;
+    z-index: -1; /* behind the canvas */
 }
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
     border: none;
 }
 
@@ -22,20 +35,30 @@ button {
     width: 20vw;  
     height: 20vw; 
     cursor: pointer;
-    margin-left: 20%; 
+    margin-left: 70%; 
+    margin-top: 0;
 }
 
-.play-image {
-    width: 35vw;  
-    height: 35vw; 
-    object-fit: cover;
-    margin-left: 5%;
-    border-radius: 20px;
+
+#languageToggleButton {
+    display: flex;
+    cursor: pointer;
+    border: none; 
+    background: none;
+    position: fixed;
+    top: 5%; 
+    right: 10%; 
+    background: none;
+}
+
+.language-image{
+    width: 6vh;
 }
 
 .control-buttons {
     display: flex;
     align-items: center;  /* align images vertically */
+    margin-top: 0px;
 }
 
 /* container styles */
@@ -46,7 +69,7 @@ button {
     padding: 20px;
     background-color: #cbdce1;
     border-radius: 20px;
-    height: 50vh;
+    height: 40vh;
     width: 85vw;
     margin-top: 10vh; 
     margin-left: 5%;
@@ -54,7 +77,7 @@ button {
 }
 
 .back-button {
-    width: 7vh; 
+    width: 8vh; 
     height: auto; 
     cursor: pointer;
     margin-top: 20px; 
@@ -69,7 +92,7 @@ button:hover {
 }
 
 label {
-    font-size: 32px;
+    font-size: 20vw;
     margin-top: 0px;
     color: #34495e;
 }
@@ -81,17 +104,27 @@ label {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20vh;
+    height: 100%;
 }
 
-canvas {
-    border-radius: 10px;
-    background-color: transparent; 
+.text-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px; 
+    margin-left: 5%;
+    
 }
+
+.text-display {
+    color: #34495e; 
+    font-size: 3vh; 
+    margin: 0 10px; 
+}
+
 
 .body-foot {
     width: 100%;
-    background-color: #ddebee;
+    background-color: transparent;
     padding: 20px;
     position: fixed; 
     bottom: 0; 
@@ -104,6 +137,6 @@ canvas {
     text-align: center;
     font-size: 1.5em;
     font-weight: 1200;
-    color: #34495e;
+    color: #ddebee;
     font-family: Arial, sans-serif; 
 }

@@ -75,6 +75,21 @@ label {
     color: #34495e;
 }
 
+#languageToggleButton {
+    display: flex;
+    cursor: pointer;
+    border: none; 
+    background: none;
+    position: fixed;
+    top: 5%; 
+    right: 10%; 
+    background: none;
+}
+
+.language-image{
+    width: 6vh;
+}
+
 #canvasContainer {
     position: relative;
     width: 800px;

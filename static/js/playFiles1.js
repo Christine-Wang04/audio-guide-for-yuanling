@@ -11,19 +11,20 @@ let currentTrack = null;
 let fadeInDuration = 2000; // adjust as needed
 let fadeOutDuration = 2000; // adjust as needed
 let currentlyPlayingLocation = null; // track which location's track is currently playing
-let tracks = {
-    "location1": "static/audio/group1/group1_track1.mp3",
-    "location2": "static/audio/group1/group1_track2.mp3",
-    "location3": "static/audio/group1/group1_track3.mp3",
-    "location4": "static/audio/group1/group1_track4.mp3",
-    "location5": "static/audio/group1/group1_track5.mp3",
-    "location6": "static/audio/group1/group1_track6.mp3"
-    // add more below...
-};
+
+function getTracks() {
+    let currentLanguage = localStorage.getItem('appLanguage') || 'english';
+    let currentPage = document.body.dataset.page;
+    return languageData[currentLanguage][currentPage].audio.tracks;
+}
 
 let isPlaying = false;
 let backgroundTrack = null;
 let isTrackLoading = false;
+
+let bgFadeDuration = 2000; // fade in/out duration in milliseconds
+let bgDynamicVolume = -6;  // volume in dB when no other tracks are playing
+let backgroundVolume = -12;
 
 async function userInteracted() {
     if (!window.audioContextStarted) {
@@ -42,12 +43,13 @@ async function userInteracted() {
 // background track
 function startBackgroundTrack() {
     const backgroundFile = "static/audio/group1/group1_background1.mp3";
-    loadAndPlayAudio(backgroundFile, true, true, function(player) {
+    loadAndPlayAudio(backgroundFile, true, bgFadeDuration, function(player) {
         backgroundTrack = player;
         console.log("background track started.");
-    });
-    backgroundTrack.volume.value = -12; // set the background track volume here
+        updateBackgroundTrackVolume(); // adjust volume based on currentTrack
+    }, bgDynamicVolume); // set initial volume
 }
+
 
 async function togglePlayback() {
     let playButton = document.getElementById('playButton');
@@ -151,28 +153,47 @@ function startNewTrack(trackFile, locationKey, fadeIn = false) {
     });
 }
 
-function loadAndPlayAudio(file, loop = true, fadeIn = false, callback) {
+function loadAndPlayAudio(file, loop = true, fadeInDuration = 0, callback, initialVolume = 0) {
     const player = new Tone.Player({
         url: file,
         autostart: false,
         loop: loop,
-        fadeOut: fadeOutDuration / 1000, // set fadeOut here
+        fadeOut: fadeOutDuration / 1000, // Convert ms to seconds
+        volume: initialVolume, // Set initial volume
         onload: () => {
             player.toDestination();
-            player.fadeIn = fadeIn ? fadeInDuration / 1000 : 0;
+            player.fadeIn = fadeInDuration / 1000; // Convert ms to seconds
             player.start();
             if (callback) callback(player);
         },
         onstop: () => {
-            // dispose of the player when it stops
+            // Dispose of the player when it stops
             player.dispose();
-            console.log(`player for ${file} stopped and disposed.`);
+            console.log(`Player for ${file} stopped and disposed.`);
+            if (player === currentTrack) {
+                currentTrack = null;
+                currentlyPlayingLocation = null;
+                updateBackgroundTrackVolume();
+            }
         },
         onerror: (error) => {
             console.error(`error loading ${file}:`, error);
         }
     });
 }
+
+function updateBackgroundTrackVolume() {
+    if (backgroundTrack) {
+        if (currentTrack) {
+            // other track is playing, fade background track volume down
+            backgroundTrack.volume.rampTo(backgroundVolume, bgFadeDuration / 1000);
+        } else {
+            // no other tracks are playing, fade background track volume up
+            backgroundTrack.volume.rampTo(bgDynamicVolume, bgFadeDuration / 1000);
+        }
+    }
+}
+
 
 async function handleLocationChange(latitude, longitude) {
     console.log(`handleLocationChange called with latitude: ${latitude}, longitude: ${longitude}`);
@@ -185,6 +206,8 @@ async function handleLocationChange(latitude, longitude) {
     if (!window.audioContextStarted) {
         await userInteracted();
     }
+
+    let tracks = getTracks();
 
     // adjust the following conditions for actual location-based playback
     if (latitude > 22.5526 && latitude < 22.5546 && longitude > 114.0913 && longitude < 114.0919) {
@@ -205,6 +228,17 @@ async function handleLocationChange(latitude, longitude) {
             currentlyPlayingLocation = null;
         }
     }
+
+    if (backgroundTrack) {
+        if (playingSquares.length > 0) {
+            // other tracks are playing, fade background track volume down to backgroundVolume (slider value)
+            backgroundTrack.volume.rampTo(backgroundVolume, bgFadeDuration);
+        } else {
+            // no other tracks are playing, fade background track volume up to bgDynamicVolume
+            backgroundTrack.volume.rampTo(bgDynamicVolume, bgFadeDuration);
+        }
+    }
+    
 }
 
 // attach handleLocationChange to the window object so it can be accessed globally

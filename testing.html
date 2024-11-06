@@ -9,10 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/13.2.0/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.39/build/Tone.js"></script>
     <script src="static/js/testing.js"></script>
+    <script src="static/js/langSwitch.js" defer></script>
 </head>
+<body data-page="testing">
 <body>
     <img src="static/images/return.png" alt="back to home" class="back-button" onclick="window.location.href='index.html'">
     <img id="playButton" src="static/images/playButton.png" alt="play" class="play-button">
+
+    <button id="languageToggleButton">
+        <img id="languageIcon" src="static/images/switchEN.png" alt="Language Icon" class="language-image">
+    </button>
     
     <!-- canvas container for the testing map -->
     <div id="canvasContainer"></div>

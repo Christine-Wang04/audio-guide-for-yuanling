@@ -129,6 +129,21 @@ label {
     margin-bottom: 5px; /* space between image and text */
 }
 
+#languageToggleButton {
+    display: flex;
+    cursor: pointer;
+    border: none; 
+    background: none;
+    position: fixed;
+    top: 5%; 
+    right: 10%; 
+    background: none;
+}
+
+.language-image{
+    width: 6vh;
+}
+
 #testButton {
     position: fixed;
     top: 10%; 

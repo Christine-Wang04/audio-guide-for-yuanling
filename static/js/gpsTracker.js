@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // create the canvas for displaying GPS data
                 const canvas = p.createCanvas(p.windowWidth * 0.8, p.windowHeight * 0.25);
                 canvas.parent('canvasContainer');
-                p.textSize(48);
+                p.textSize(window.innerHeight * 0.03);
                 p.textStyle(p.BOLD);
                 p.fill('#34495e');
 
@@ -33,15 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
                     );
                 } else {
-                    p.textSize(45);
+                    p.textSize(window.innerHeight * 0.03);
                     p.fill('#34495e');
-                    p.text('geolocation is not supported by your browser.',10, p.height * 0.25);
+                    p.text('geolocation is not supported by your browser.',p.windowWidth * 0.02, p.height * 0.05);
                     console.error('geolocation is not supported by your browser.');
                 }
             };
 
             p.windowResized = function() {
-                p.resizeCanvas(p.windowWidth * 0.8, p.windowHeight * 0.2);
+                p.resizeCanvas(p.windowWidth * 0.8, p.windowHeight * 0.25);
             };
 
             p.draw = function() {
@@ -49,14 +49,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 p.textStyle(p.BOLD);
                 p.textAlign(p.LEFT, p.CENTER);
 
-                // Display the current GPS coordinates
+                // display the current GPS coordinates
                 if (latitude !== undefined && longitude !== undefined) {
-                    p.textSize(45);
+                    p.textSize(window.innerHeight * 0.03);
                     p.fill('#34495e');
-                    p.text(`latitude: ${latitude.toFixed(4)}`, 10, p.height * 0.2);
-                    p.text(`longitude: ${longitude.toFixed(4)}`, 10, p.height * 0.4);
+                    const latDirection = latitude >= 0 ? 'N' : 'S';
+                    const lonDirection = longitude >= 0 ? 'E' : 'W';
+                    
+                    const formattedLatitude = `${Math.abs(latitude).toFixed(4)}° ${latDirection}`;
+                    const formattedLongitude = `${Math.abs(longitude).toFixed(4)}° ${lonDirection}`;
+                    p.text(`${formattedLatitude}, ${formattedLongitude}`, p.windowWidth * 0.02, p.height * 0.05);
                 } else {
-                    p.text('waiting for GPS data...', 10, p.height * 0.25);
+                    p.text('waiting for GPS data...', 10, p.height * 0.05);
                 }
             };
 
@@ -78,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // error handling function
             function showError(error) {
                 let errorMessage;
+                p.textSize(window.innerHeight * 0.03);
+                p.fill('#34495e');
                 switch (error.code) {
                     case error.PERMISSION_DENIED:
                         errorMessage = 'geolocation permission denied. please allow location access.';
