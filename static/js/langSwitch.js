@@ -106,12 +106,12 @@ const languageData = {
             },
             audio: {
                 tracks: {
-                    location1: "static/audio/group3/english/group3_track1.mp3",
-                    location2: "static/audio/group3/english/group3_track2.mp3",
-                    location3: "static/audio/group3/english/group3_track3.mp3",
-                    location4: "static/audio/group3/english/group3_track4.mp3",
-                    location5: "static/audio/group3/english/group3_track5.mp3",
-                    location6: "static/audio/group3/english/group3_track6.mp3",
+                    location1: "static/audio/group1/english/group1_track1.mp3",
+                    location2: "static/audio/group1/english/group1_track2.mp3",
+                    location3: "static/audio/group1/english/group1_track3.mp3",
+                    location4: "static/audio/group1/english/group1_track4.mp3",
+                    location5: "static/audio/group1/english/group1_track5.mp3",
+                    location6: "static/audio/group1/english/group1_track6.mp3",
                 }
             }
         },
@@ -223,12 +223,12 @@ const languageData = {
             },
             audio: {
                 tracks: {
-                    location1: "static/audio/group3/chinese/group3_track1.mp3",
-                    location2: "static/audio/group3/chinese/group3_track2.mp3",
-                    location3: "static/audio/group3/chinese/group3_track3.mp3",
-                    location4: "static/audio/group3/chinese/group3_track4.mp3",
-                    location5: "static/audio/group3/chinese/group3_track5.mp3",
-                    location6: "static/audio/group3/chinese/group3_track6.mp3",
+                    location1: "static/audio/group1/chinese/group1_track1.mp3",
+                    location2: "static/audio/group1/chinese/group1_track2.mp3",
+                    location3: "static/audio/group1/chinese/group1_track3.mp3",
+                    location4: "static/audio/group1/chinese/group1_track4.mp3",
+                    location5: "static/audio/group1/chinese/group1_track5.mp3",
+                    location6: "static/audio/group1/chinese/group1_track6.mp3",
                 }
             }
         },
